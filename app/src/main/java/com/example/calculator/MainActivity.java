@@ -3,6 +3,7 @@ package com.example.calculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textViewHistory = findViewById(R.id.textViewHistory);
+        textViewHistory.setMovementMethod(new ScrollingMovementMethod());
         textViewResult = findViewById(R.id.textViewResult);
 
         findButtons();
@@ -242,6 +244,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 operator = false;
                 btnEqualsControl = true;
+
+                history = textViewHistory.getText().toString() + "\n" + myFormat.format(firstNumber) + "\n";
+                textViewHistory.setText(history);
             }
         });
 
@@ -283,7 +288,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void printHistoryForOperators(String operatorSign) {
         history = textViewHistory.getText().toString();
-//        currentResult = textViewResult.getText().toString();
         textViewHistory.setText(history + operatorSign);
     }
 
